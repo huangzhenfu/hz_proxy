@@ -24,12 +24,19 @@ type reqConf struct {
 	EncryptToken  string
 	IsEncrypt     bool
 	ProxyTag      string
+	Username      string
+	Pwd           string
 }
 type midReqConf struct {
 	Port          int
 	EncryptMethod string
 	EncryptToken  string
 	IsEncrypt     bool
+	Users         []userReq
+}
+type userReq struct {
+	Username string
+	Pwd      string
 }
 
 type proxyTag struct {

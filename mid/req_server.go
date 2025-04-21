@@ -56,7 +56,24 @@ func reqServerProcess(c *leftConn) {
 		}
 	}()
 
-	//todo 验证认证信息
+	//处理认证
+	authMsg := utils.MsgDecode(c.Conn)
+	if authMsg.Err != nil {
+		return
+	}
+	authMsgData := &utils.StructMsg{}
+	if err := json.Unmarshal(authMsg.Msg, authMsgData); err != nil {
+		return
+	}
+	if !checkAuthReq(authMsgData.Username, authMsgData.Password) {
+		if err := c.Write([]byte("auth failed"), authMsg.StreamId, []byte(utils.EventAuth)); err != nil {
+			c.Log(fmt.Sprintf("认证失败：%v", err.Error()))
+		}
+		return
+	}
+	if err := c.Write([]byte("ok"), authMsg.StreamId, []byte(utils.EventAuth)); err != nil {
+		c.Log(fmt.Sprintf("%v", err.Error()))
+	}
 
 	//握手信息 proxyTag targetAddr
 	rMsg := utils.MsgDecode(c.Conn)

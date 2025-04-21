@@ -63,6 +63,18 @@ func checkAuth(tag, username, pwd string) bool {
 	return retRes
 }
 
+func checkAuthReq(username, pwd string) bool {
+	retRes := false
+	list := config.Conf.MidReq.Users
+	for _, v := range list {
+		if v.Username == username && v.Pwd == pwd {
+			retRes = true
+		}
+		break
+	}
+	return retRes
+}
+
 func resServerProcess(c *rightConn) {
 	defer func() {
 		if err := c.close(); err != nil {

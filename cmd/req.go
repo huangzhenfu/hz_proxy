@@ -6,7 +6,7 @@ import (
 )
 
 var reqCmd = &cobra.Command{
-	Use:   "proxy req",
+	Use:   "req",
 	Short: "客户端代理服务",
 	Long:  `req`,
 	Run: func(cmd *cobra.Command, args []string) {

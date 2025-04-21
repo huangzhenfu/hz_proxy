@@ -83,7 +83,24 @@ func processHttp(conn *utils.FdConn) {
 	}
 	defer mFdConn.Close()
 
-	//todo 远程服务认证
+	//认证：发送用户名和密码
+	tmpMsg := utils.StructMsg{Username: conf.Username, Password: conf.Pwd}
+	sendMsg, _ := json.Marshal(tmpMsg)
+	if err = mFdConn.Write(sendMsg, []byte{}, []byte(utils.EventAuth)); err != nil {
+		conn.Log(fmt.Sprintf("目标服务：%s,远程服务认证失败: %v", address, err.Error()), log.DebugError)
+		return
+	}
+	authMsg := utils.MsgDecode(mFdConn.Conn)
+	if authMsg.Err != nil {
+		conn.Log(fmt.Sprintf("目标服务：%s,远程服务认证失败: %v", address, authMsg.Err.Error()), log.DebugError)
+		return
+	}
+	if string(authMsg.Msg) != "ok" {
+		conn.Log(fmt.Sprintf("目标服务：%s,远程服务认证失败: %v", address, string(authMsg.Msg)), log.DebugError)
+		return
+	}
+	//连接建立成功
+	conn.Log(fmt.Sprintf("目标服务：%s,远程服务认证成功", address))
 
 	//请求和target建立连接
 	proxyAndTarget, _ := json.Marshal(utils.StructMsg{ProxyTag: conf.ProxyTag, TargetAddr: address})
