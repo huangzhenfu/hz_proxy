@@ -6,9 +6,9 @@ import (
 )
 
 var midCmd = &cobra.Command{
-	Use:   "mid",
-	Short: "mid",
-	Long:  `mid`,
+	Use:   "proxy mid",
+	Short: "中间代理服务",
+	Long:  `中间代理服务`,
 	Run: func(cmd *cobra.Command, args []string) {
 		mid.Run()
 	},

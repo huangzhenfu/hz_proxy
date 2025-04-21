@@ -6,8 +6,8 @@ import (
 )
 
 var reqCmd = &cobra.Command{
-	Use:   "req",
-	Short: "req",
+	Use:   "proxy req",
+	Short: "客户端代理服务",
 	Long:  `req`,
 	Run: func(cmd *cobra.Command, args []string) {
 		go req.TcpClient()
