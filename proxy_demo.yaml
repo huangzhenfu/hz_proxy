@@ -1,0 +1,49 @@
+debug: true
+#请求客户端代理配置
+req:
+  HttpPort: 1080
+  TcpPort: 1081
+  MidPort: 8888
+  MidHost: "106.15.53.9"
+  IsEncrypt: true
+  EncryptMethod: "AEAD_AES_256_GCM"
+  EncryptToken: "123456"
+  ProxyTag: "aws_huang"
+  Username: "huang"
+  Pwd: "huang888"
+
+#中转服务请求侧配置
+midReq:
+  Port: 8888
+  IsEncrypt: true
+  EncryptMethod: "AEAD_AES_256_GCM"
+  EncryptToken: "123456"
+  Users:
+    - Username: "test"
+      Pwd: "123456"
+
+#中转服务响应侧配置
+midRes:
+  Port: 8889
+  IsEncrypt: true
+  EncryptMethod: "AEAD_AES_256_GCM"
+  EncryptToken: "123456"
+  ProxyTags:
+    - Tag: "test"
+      Desc: "122333"
+      PoolSize: 10
+      Username: "test"
+      Pwd: "123456"
+
+#响应客户端代理配置
+res:
+  MidHost: "127.0.0.1"
+  MidPort: 8889
+  IsEncrypt: true
+  EncryptMethod: "AEAD_AES_256_GCM"
+  EncryptToken: "123456"
+  Username: "test"
+  Pwd: "123456"
+  Tag: "test"
+  PoolSize: 10
+

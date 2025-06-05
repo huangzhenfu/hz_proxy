@@ -148,7 +148,9 @@ func processTcp(conn *utils.FdConn) {
 }
 
 func tcpTargetAddr(conn *utils.FdConn) (address string, pErr error) {
-	address = "106.15.53.9:3306"
+	address = "xxxxxx:5530"
+
+	//todo 根据协议解析出目标地址和端口号
 
 	//buf := make([]byte, 256)
 	//n, err := io.ReadAtLeast(conn.Reader, buf, 4)
