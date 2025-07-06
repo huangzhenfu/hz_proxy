@@ -26,6 +26,7 @@ type reqConf struct {
 	ProxyTag      string
 	Username      string
 	Pwd           string
+	TcpTargetAddr string
 }
 type midReqConf struct {
 	Port          int

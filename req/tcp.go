@@ -148,9 +148,12 @@ func processTcp(conn *utils.FdConn) {
 }
 
 func tcpTargetAddr(conn *utils.FdConn) (address string, pErr error) {
-	address = "xxxxxx:5530"
 
-	//todo 根据协议解析出目标地址和端口号
+	if config.Conf.Req.TcpTargetAddr != "" {
+		return config.Conf.Req.TcpTargetAddr, nil
+	}
+
+	//ToDo 自动获取目标地址
 
 	//buf := make([]byte, 256)
 	//n, err := io.ReadAtLeast(conn.Reader, buf, 4)
@@ -162,6 +165,7 @@ func tcpTargetAddr(conn *utils.FdConn) (address string, pErr error) {
 	//if isMySQL(buf[:n]) {
 	//
 	//}
+
 	return address, nil
 }
 

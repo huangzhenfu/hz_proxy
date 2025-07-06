@@ -11,6 +11,7 @@ req:
   ProxyTag: "aws_huang"
   Username: "huang"
   Pwd: "huang888"
+  TcpTargetAddr: "" #tcp代理的目标地址
 
 #中转服务请求侧配置
 midReq:
