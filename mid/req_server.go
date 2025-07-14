@@ -35,7 +35,8 @@ func ReqServer() error {
 	for {
 		conn, err1 := listen.Accept()
 		if err1 != nil {
-			return err1
+			fmt.Printf("ReqServer接收连接异常：%v\n", err1)
+			continue
 		}
 		tmpFd, tmpErr := utils.NewFdConn(conn, conf.IsEncrypt, conf.EncryptMethod, conf.EncryptToken)
 		if tmpErr != nil {

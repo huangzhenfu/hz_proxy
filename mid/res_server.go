@@ -36,10 +36,12 @@ func ResServer() error {
 	for {
 		conn, err1 := listen.Accept()
 		if err1 != nil {
-			return err1
+			log.Printf("响应代理接收连接异常:%v", err1.Error())
+			continue
 		}
 		tmpFd, tmpErr := utils.NewFdConn(conn, conf.IsEncrypt, conf.EncryptMethod, conf.EncryptToken)
 		if tmpErr != nil {
+			log.Printf("响应代理获取加密消息失败:%v", tmpErr.Error())
 			continue
 		}
 		sConn := &rightConn{
